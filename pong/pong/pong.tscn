@@ -1,0 +1,126 @@
+[gd_scene load_steps=16 format=3 uid="uid://bkpcow4tffufq"]
+
+[ext_resource type="Script" uid="uid://df23n504cxm6m" path="res://pong/paddle_right.gd" id="1_1hw3o"]
+[ext_resource type="Script" uid="uid://dpu8v05ftb2bs" path="res://pong/pong.gd" id="1_one0h"]
+[ext_resource type="Texture2D" uid="uid://nidwhan7tum7" path="res://pong/circuspaddle.png" id="2_g8uh0"]
+[ext_resource type="Texture2D" uid="uid://c8qghgt48q7dl" path="res://pong/circuspaddleALT.png" id="3_fif4v"]
+[ext_resource type="Script" uid="uid://kocbklsx08qn" path="res://pong/paddle_left.gd" id="4_7b4hy"]
+[ext_resource type="Script" uid="uid://cmfac08u023y4" path="res://pong/ball.gd" id="5_gcr4s"]
+[ext_resource type="Texture2D" uid="uid://i6jti76diceq" path="res://pong/circusball.png" id="6_7b4hy"]
+[ext_resource type="Script" uid="uid://b8accplycur8c" path="res://pong/net.gd" id="7_g7dnj"]
+[ext_resource type="Texture2D" uid="uid://c7o0xn5jblf85" path="res://terrain_dirt_top_h_outline.png" id="8_g7dnj"]
+[ext_resource type="Script" uid="uid://c38nkbenp8wpj" path="res://pong/net_2.gd" id="9_g7dnj"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_teprw"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_one0h"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_15bvd"]
+radius = 36.2215
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_578uy"]
+size = Vector2(17.5475, 104)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_w6tc4"]
+size = Vector2(102.5, 648)
+
+[node name="Pong" type="Node2D"]
+script = ExtResource("1_one0h")
+
+[node name="PaddleRight" type="CharacterBody2D" parent="."]
+position = Vector2(1094, 523)
+scale = Vector2(0.226956, 0.226956)
+script = ExtResource("1_1hw3o")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PaddleRight"]
+position = Vector2(-14, 0)
+scale = Vector2(11.44, 32.2)
+shape = SubResource("CapsuleShape2D_teprw")
+
+[node name="Circuspaddle" type="Sprite2D" parent="PaddleRight"]
+position = Vector2(-4, -1)
+texture = ExtResource("2_g8uh0")
+
+[node name="PaddleLeft" type="CharacterBody2D" parent="."]
+position = Vector2(57, 519)
+scale = Vector2(0.236898, 0.236898)
+script = ExtResource("4_7b4hy")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PaddleLeft"]
+position = Vector2(4.22122, 0)
+scale = Vector2(12.08, 31.44)
+shape = SubResource("CapsuleShape2D_one0h")
+
+[node name="CircuspaddleAlt" type="Sprite2D" parent="PaddleLeft"]
+position = Vector2(-8.00006, 1)
+rotation = -3.14085
+scale = Vector2(1, 1)
+texture = ExtResource("3_fif4v")
+
+[node name="Ball" type="CharacterBody2D" parent="."]
+position = Vector2(629, 123)
+script = ExtResource("5_gcr4s")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ball"]
+shape = SubResource("CircleShape2D_15bvd")
+
+[node name="Sprite2D" type="Sprite2D" parent="Ball"]
+scale = Vector2(0.122989, 0.122989)
+texture = ExtResource("6_7b4hy")
+
+[node name="Wall" type="StaticBody2D" parent="."]
+position = Vector2(574, -44)
+collision_layer = 3855
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Wall"]
+position = Vector2(-0.500061, 2)
+scale = Vector2(63.2, 1)
+shape = SubResource("RectangleShape2D_578uy")
+
+[node name="TerrainDirtTopHOutline" type="Sprite2D" parent="Wall"]
+position = Vector2(-1, -1)
+scale = Vector2(18.28, 1.64)
+texture = ExtResource("8_g7dnj")
+
+[node name="Wall2" type="StaticBody2D" parent="."]
+position = Vector2(580, 686)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Wall2"]
+position = Vector2(-8, 1)
+scale = Vector2(63.2, 1)
+shape = SubResource("RectangleShape2D_578uy")
+
+[node name="TerrainDirtTopHOutline2" type="Sprite2D" parent="Wall2"]
+position = Vector2(0, -2)
+scale = Vector2(18.2, 1.48)
+texture = ExtResource("8_g7dnj")
+
+[node name="Net" type="Area2D" parent="."]
+position = Vector2(-38, 289)
+collision_layer = 3855
+script = ExtResource("7_g7dnj")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Net"]
+position = Vector2(-1, 2)
+shape = SubResource("RectangleShape2D_w6tc4")
+
+[node name="TerrainDirtTopHOutline2" type="Sprite2D" parent="Net"]
+position = Vector2(0.999985, 0)
+scale = Vector2(1.58375, 12.9221)
+texture = ExtResource("8_g7dnj")
+
+[node name="Net2" type="Area2D" parent="."]
+position = Vector2(1217, 6)
+script = ExtResource("9_g7dnj")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Net2"]
+position = Vector2(-35.75, 324)
+shape = SubResource("RectangleShape2D_w6tc4")
+
+[node name="TerrainDirtTopHOutline" type="Sprite2D" parent="Net2"]
+position = Vector2(-35, 290)
+scale = Vector2(1.50372, 12.8422)
+texture = ExtResource("8_g7dnj")
+
+[connection signal="body_entered" from="Net" to="Net" method="_on_body_entered"]
+[connection signal="body_entered" from="Net2" to="Net2" method="_on_body_entered"]
